@@ -47,12 +47,10 @@ jobs:
         uses: google-github-actions/get-gke-credentials@v2
         with:
           cluster_name: standard-cluster
-          # If your cluster is in India, this MUST be asia-south1-a
           location: us-central1-a
 
       - name: Kubernetes Deploy
         run: |
-          # Ensure deployment.yaml exists in the root of your repo
-          sed -i "s|image:.*|image: asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/java-project/java-app:${{ github.sha }}|g" deployment.yaml
-          kubectl apply -f deployment.yaml
-          kubectl apply -f service.yaml
+          sed -i "s|image:.*|image: asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/java-project/java-app:${{ github.sha }}|g" k8s/deployment.yaml
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
