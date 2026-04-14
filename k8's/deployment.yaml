@@ -15,6 +15,6 @@ spec:
       containers:
       - name: java-app
         # This image path will be updated automatically by the pipeline
-        image: asia-south1-docker.pkg.dev/verified-project-489808/my-java-repo/java-app:latest
+        image: asia-south1-docker.pkg.dev/verified-project-489808/java-project/java-app:latest
         ports:
         - containerPort: 8080
