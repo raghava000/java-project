@@ -43,16 +43,19 @@ jobs:
         docker build -t asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/java-project/java-app:${{ github.sha }} .
         docker push asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/java-project/java-app:${{ github.sha }}
 
-    - name: Get GKE Credentials
+   - name: Get GKE Credentials
       uses: google-github-actions/get-gke-credentials@v2
       with:
-        # REPLACE THIS WITH YOUR ACTUAL CLUSTER NAME
         cluster_name: standard-cluster
+        # VERIFY THIS: Is your cluster actually in us-central1-a? 
+        # If it's in India, change this to asia-south1-a
         location: us-central1-a
 
-    - name: Kubernetes Deploy
+  - name: Kubernetes Deploy
       run: |
-        # Update the image tag dynamically
-        sed -i "s|image:.*|image: asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-java-repo/java-app:${{ github.sha }}|g" deployment.yaml
+        # 1. Ensure the filename matches what is in your repo (deployment.yaml vs deploy.yaml)
+        # 2. Fixed the repository name to 'java-project' to match your build step
+        sed -i "s|image:.*|image: asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/java-project/java-app:${{ github.sha }}|g" deployment.yaml
+        
         kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
