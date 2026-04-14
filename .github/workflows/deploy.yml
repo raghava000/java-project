@@ -40,8 +40,8 @@ jobs:
     - name: Docker Auth and Build
       run: |
         gcloud auth configure-docker asia-south1-docker.pkg.dev
-        docker build -t asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-java-repo/java-app:${{ github.sha }} .
-        docker push asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-java-repo/java-app:${{ github.sha }}
+        docker build -t asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/java-project/java-app:${{ github.sha }} .
+        docker push asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/java-project/java-app:${{ github.sha }}
 
     - name: Get GKE Credentials
       uses: google-github-actions/get-gke-credentials@v2
