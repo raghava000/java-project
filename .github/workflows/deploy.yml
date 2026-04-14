@@ -53,5 +53,5 @@ jobs:
     - name: Kubernetes Deploy
       run: |
         # Update the image tag dynamically
-        sed -i "s|image:.*|image: asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-java-repo/java-app:${{ github.sha }}|g" k8s/deployment.yaml
-        kubectl apply -f k8s/
+        sed -i "s|image:.*|image: asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-java-repo/java-app:${{ github.sha }}|g" k8's/deployment.yaml
+        kubectl apply -f k8's/
